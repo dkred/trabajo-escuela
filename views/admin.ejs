@@ -1,0 +1,113 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+                <div class="row column">
+                    <br>
+                    <ul class="accordion" data-accordion>
+                      <li class="accordion-item is-active" data-accordion-item>
+                        <a href="#" class="accordion-title">Docentes</a>
+                        <div class="accordion-content" data-tab-content >
+                          <ul class="vertical menu">
+                              <li><a href="http://localhost:8888/admin/docente">Ver Docentes</a></li>
+                              <li><a href="http://localhost:8888/admin/add_docente">Añadir Docente</a></li>
+                           </ul>
+                        </div>
+                      </li>
+                      <li class="accordion-item" data-accordion-item>
+                        <a href="#" class="accordion-title">Rubricas</a>
+                        <div class="accordion-content" data-tab-content>
+                           <ul class="vertical menu">
+                              <li><a href="http://localhost:8888/admin/rubrica">Ver Rubricas</a></li>
+                              <li><a href="http://localhost:8888/admin/add_rubrica">Añadir Rubrica</a></li>
+                           </ul>
+                        </div>
+                      </li>
+                      <li class="accordion-item" data-accordion-item>
+                        <a href="#" class="accordion-title">Alumnos</a>
+                        <div class="accordion-content" data-tab-content>
+                           <ul class="vertical menu">
+                              <li><a href="http://localhost:8888/admin/alumno">Ver Alumnos</a></li>
+                              <li><a href="http://localhost:8888/admin/add_alumno">Añadir Alumno</a></li>
+                           </ul>
+                        </div>
+                      </li>
+                      <li class="accordion-item" data-accordion-item>
+                        <a href="#" class="accordion-title">Usuarios</a>
+                        <div class="accordion-content" data-tab-content>
+                           <ul class="vertical menu">
+                              <li><a href="http://localhost:8888/admin/usuario">Ver Usuarios</a></li>
+                              <li><a href="http://localhost:8888/admin/add_usuario">Añadir Usuario</a></li>
+                           </ul>
+                        </div>
+                      </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Administrador </h1>
+                        <p class="lead">Bienvenido <%= usuario %>.</p>
+                    </div>
+                </div>
+                <div class="container" style="margin-left: 20px; margin-right: 20px;">
+                    <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="test-eq">
+                      <div class="cell medium-3">
+                        <div class="callout" data-equalizer-watch>
+                         <a href="admin/docente">    
+                         <img src= "img/docente.png"></a>
+                        </div>
+                        <h3 style="text-align: center; ">Docentes</h3>
+                      </div>
+                      <div class="cell medium-3">
+                        <div class="callout" data-equalizer-watch>
+                          <a href="admin/rubrica">  
+                          <img src= "img/notas.png">
+                          </a>
+                        </div>
+                        <h3 style="text-align: center; ">Rúbricas</h3>
+                      </div>
+                      <div class="cell medium-3">
+                        <div class="callout" data-equalizer-watch>
+                          <a href="admin/alumno"> 
+                          <img src= "img/alumno.png"></a>
+                        </div>
+                        <h3 style="text-align: center; ">Alumnos</h3>
+                      </div>
+                      <div class="cell medium-3">
+                        <div class="callout" data-equalizer-watch>
+                          <a href="admin/usuarios"> 
+                          <img src= "img/usuarios.jpg"></a>
+                        </div>
+                        <h3 style="text-align: center; ">Usuarios</h3>
+                      </div>
+                    </div>
+                </div>
+                <hr>
+               
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+</html>
