@@ -13,50 +13,7 @@
 <body>
     <div class="off-canvas-wrapper">
         <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-            <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
-                <div class="row column">
-                    <br>
-                    <ul class="accordion" data-accordion>
-                      <li class="accordion-item is-active" data-accordion-item>
-                        <a href="#" class="accordion-title">Docentes</a>
-                        <div class="accordion-content" data-tab-content >
-                          <ul class="vertical menu">
-                              <li><a href="http://localhost:8888/admin/docente">Ver Docentes</a></li>
-                              <li><a href="http://localhost:8888/admin/add_docente">Añadir Docente</a></li>
-                           </ul>
-                        </div>
-                      </li>
-                      <li class="accordion-item" data-accordion-item>
-                        <a href="#" class="accordion-title">Rubricas</a>
-                        <div class="accordion-content" data-tab-content>
-                           <ul class="vertical menu">
-                              <li><a href="http://localhost:8888/admin/rubrica">Ver Rubricas</a></li>
-                              <li><a href="http://localhost:8888/admin/add_rubrica">Añadir Rubrica</a></li>
-                           </ul>
-                        </div>
-                      </li>
-                      <li class="accordion-item" data-accordion-item>
-                        <a href="#" class="accordion-title">Alumnos</a>
-                        <div class="accordion-content" data-tab-content>
-                           <ul class="vertical menu">
-                              <li><a href="http://localhost:8888/admin/alumno">Ver Alumnos</a></li>
-                              <li><a href="http://localhost:8888/admin/add_alumno">Añadir Alumno</a></li>
-                           </ul>
-                        </div>
-                      </li>
-                      <li class="accordion-item" data-accordion-item>
-                        <a href="#" class="accordion-title">Usuarios</a>
-                        <div class="accordion-content" data-tab-content>
-                           <ul class="vertical menu">
-                              <li><a href="http://localhost:8888/admin/usuario">Ver Usuarios</a></li>
-                              <li><a href="http://localhost:8888/admin/add_usuario">Añadir Usuario</a></li>
-                           </ul>
-                        </div>
-                      </li>
-                    </ul>
-
-                </div>
-            </div>
+           <% include plantillas/menu.ejs %>
             <div class="off-canvas-content" data-off-canvas-content>
                 
                 <div class="callout primary">
@@ -91,7 +48,7 @@
                       </div>
                       <div class="cell medium-3">
                         <div class="callout" data-equalizer-watch>
-                          <a href="admin/usuarios"> 
+                          <a href="admin/usuario"> 
                           <img src= "img/usuarios.jpg"></a>
                         </div>
                         <h3 style="text-align: center; ">Usuarios</h3>

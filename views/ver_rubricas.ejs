@@ -22,59 +22,50 @@
                 <div class="callout primary">
                     <div class="row column">
                         <h1>Panel Administrador </h1>
-                        <p class="lead">Bienvenido <%= usuario %>.</p>
+                        <p class="lead">Bienvenido.</p>
                     </div>
                 </div>
                 
                 <div class="top-bar" id="example-menu">
                   <div class="top-bar-left">
                     <ul class="dropdown menu" data-dropdown-menu>
-                      <li class="menu-text">Lista de Profesores</li>
+                      <li class="menu-text">Rubrica <%= nombre %></li>
                       
                     </ul>
                   </div>
-                  <div class="top-bar-right">
-                    <ul class="menu">
-                      <li><input type="search" placeholder="Search"></li>
-                      <li><button type="button" class="button">Search</button></li>
-                    </ul>
-                  </div>
+                  
                 </div>
-                <table>
+               <table id ="myTable">
                   <thead>
                     <tr>
-                      <th width="100">Nombre</th>
-                      <th width="100">Apellido</th>
-                      <th width="100">Curso</th>
-                      <th width="100">Grado</th>
-                      <th width="100">Sección</th>
+                      <th width="100">Item</th>
+                      <th width="100">Sobresaliente</th>
+                      <th width="100">Logrado</th>
+                      <th width="100">En proceso</th>
+                      <th width="100">En inicio</th>
                       <th width="100">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% profesor.forEach(function(profe) { %>
+                   
+                    <% rubrica.forEach(function(rub) { %>
                     <tr>
-                      <td><%= profe.nombre %></td>
-                      <td><%= profe.apellido %></td>
-                      <td><%= profe.curso %></td>
-                      <td><%= profe.grado %></td>
-                      <td><%= profe.seccion %></td>
+                      <form method="POST" action="http://localhost:8888/admin/edit_rubrica_post">
+                      <td><input type="text" name="i" value="<%= rub.item %>"></td>
+                      <td><input type="text" name="rs" value="<%= rub.sobresaliente %>"></td>
+                      <td><input type="text" name="rl" value="<%= rub.logrado %>"></td>
+                      <td><input type="text" name="rp" value="<%= rub.proceso %>"></td>
+                      <td><input type="text" name="ri" value="<%= rub.inicio %>"></td>
+                      
                       <td style="display: inline-flex;">
-                        
-                          <form method="POST" action="http://localhost:8888/admin/edit_docente_post">
-                              <input type="hidden" name="id" value="<%= profe.id %>">
+                          
+                              <input type="hidden" name="id" value="<%= rub.id %>">
                               <button class="" type="submit" style="background-image: url('../img/editar.png'); background-size: cover; width: 20px; height: 20px;"></button> 
-                              
-                            
-                          </form>
-                           <form method="POST" action="http://localhost:8888/admin/delete_docente_post">
-                              <input type="hidden" name="id" value="<%= profe.id %>">
-                            <button class="" type="submit" style="background-image: url('../img/cerrar.png'); background-size: cover; width: 20px; height: 20px; margin-left: 5px;"></button> 
-                          </form>
-                       
-                      </td>
+                      </td> 
+                    </form>
                     </tr>
                     <% }); %>
+                    
                   </tbody>
                 </table>
             </div>

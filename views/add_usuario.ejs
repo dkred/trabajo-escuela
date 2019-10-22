@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <% include plantillas/header-styles.ejs %>
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <% include plantillas/menu.ejs %>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Administrador </h1>
+                        <p class="lead"> <%= tipo %> USUARIO.</p>
+                    </div>
+                </div>
+                <div class="container" style="margin-left: 20px;margin-right: 20px;">
+               <form method="POST" action="http://localhost:8888/admin/add_usuario_post">
+                    <input type="hidden" name="id" value="<%= usuarios.id %>">
+                    <label>Usuario
+                      <input type="text" placeholder="Usuario" value="<%= usuarios.user %>" name="user" aria-describedby="exampleHelpText">
+                    </label>
+                    <label>
+                      Password
+                      <input type="text" placeholder="Password" value="<%= usuarios.password %>" name="password">
+                    </label>
+                     <label>
+                      Tipo
+                      <select name="tipo">
+                        <%
+                        var options = [ "administrador", "profesor", "estudiante" ];
+                        for ( var i = 0; i < options.length; i++ )
+                        {
+                            var selected = ( usuarios.tipo == options[ i ] ) ? "selected" : "";
+                            %><option value="<%=options[ i ] %>" <%=selected %>><%=options[ i ] %></option><%
+                        }
+                        %>
+                      </select>
+                   
+                    </label>
+                    
+                    <div class="input-group">
+                      <button type="button submit" class="success button">Save</button>
+                    </div>
+              </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+</html>

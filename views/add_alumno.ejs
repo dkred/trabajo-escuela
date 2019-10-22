@@ -17,30 +17,30 @@
                 <div class="callout primary">
                     <div class="row column">
                         <h1>Panel Administrador </h1>
-                        <p class="lead"> <%= tipo %> DOCENTE.</p>
+                        <p class="lead"> <%= tipo %> ALUMNO.</p>
                     </div>
                 </div>
                 <div class="container" style="margin-left: 20px;margin-right: 20px;">
-               <form method="POST" action="http://localhost:8888/admin/add_docente_post">
-                    <input type="hidden" name="id" value="<%= profesor.id %>">
+               <form method="POST" action="http://localhost:8888/admin/add_alumno_post">
+                    <input type="hidden" name="id" value="<%= alumno.id %>">
                     <label>Nombre
-                      <input type="text" placeholder="Nombres" value="<%= profesor.nombre %>" name="nombre" aria-describedby="exampleHelpText">
+                      <input type="text" placeholder="Nombres" value="<%= alumno.nombre %>" name="nombre" aria-describedby="exampleHelpText">
                     </label>
                     <label>
                       Apellido
-                      <input type="text" placeholder="Apellidos" value="<%= profesor.apellido %>" name="apellido">
-                    </label>
-                    <label>
-                      Curso
-                      <input type="text" placeholder="Curso" name="curso" value="<%= profesor.curso %>">
+                      <input type="text" placeholder="Apellidos" value="<%= alumno.apellido %>" name="apellido">
                     </label>
                     <label>
                       Grado
-                      <input type="text"  placeholder="Grado" name="grado" value="<%= profesor.grado %>">
+                      <input type="text"  placeholder="Grado" name="grado" value="<%= alumno.grado %>">
                     </label>
                     <label>
                       Sección
-                      <input type="text"  placeholder="Sección" name="seccion" value="<%= profesor.seccion %>">
+                      <input type="text"  placeholder="Sección" name="seccion" value="<%= alumno.seccion %>">
+                    </label>
+                     <label>
+                      Tutor
+                      <input type="text"  placeholder="Tutor" name="tutor" value="<%= alumno.tutor %>">
                     </label>
                     <div class="input-group">
                       <button type="button submit" class="success button">Save</button>

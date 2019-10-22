@@ -29,7 +29,7 @@
                 <div class="top-bar" id="example-menu">
                   <div class="top-bar-left">
                     <ul class="dropdown menu" data-dropdown-menu>
-                      <li class="menu-text">Lista de Profesores</li>
+                      <li class="menu-text">Lista de Cursos</li>
                       
                     </ul>
                   </div>
@@ -43,32 +43,34 @@
                 <table>
                   <thead>
                     <tr>
+                      <th width="100">Id</th>
                       <th width="100">Nombre</th>
-                      <th width="100">Apellido</th>
-                      <th width="100">Curso</th>
                       <th width="100">Grado</th>
-                      <th width="100">Sección</th>
+                      <th width="100">Rubrica</th>
                       <th width="100">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% profesor.forEach(function(profe) { %>
+                    <% curso.forEach(function(cur) { %>
                     <tr>
-                      <td><%= profe.nombre %></td>
-                      <td><%= profe.apellido %></td>
-                      <td><%= profe.curso %></td>
-                      <td><%= profe.grado %></td>
-                      <td><%= profe.seccion %></td>
+                      <td><%= cur.id %></td>
+                      <td><%= cur.nombre %></td>
+                      <td><%= cur.grado %></td>
+                      <td>
+                           <form method="POST" action="http://localhost:8888/admin/ver_rubrica_post">
+                              <input type="hidden" name="id" value="<%= cur.id %>">
+                              <input type="hidden" name="nombre" value="<%= cur.nombre %>">
+                             <button class="" type="submit" style="background-image: url('../img/buscar.png'); background-size: cover; width: 20px; height: 20px; margin-left: 5px;"></button> 
+                          </form>
+                      </td>
                       <td style="display: inline-flex;">
-                        
-                          <form method="POST" action="http://localhost:8888/admin/edit_docente_post">
-                              <input type="hidden" name="id" value="<%= profe.id %>">
+                          <form method="POST" action="http://localhost:8888/admin/edit_curso_post">
+                              <input type="hidden" name="id" value="<%= cur.id %>">
                               <button class="" type="submit" style="background-image: url('../img/editar.png'); background-size: cover; width: 20px; height: 20px;"></button> 
                               
-                            
                           </form>
-                           <form method="POST" action="http://localhost:8888/admin/delete_docente_post">
-                              <input type="hidden" name="id" value="<%= profe.id %>">
+                           <form method="POST" action="http://localhost:8888/admin/delete_curso_post">
+                              <input type="hidden" name="id" value="<%= cur.id %>">
                             <button class="" type="submit" style="background-image: url('../img/cerrar.png'); background-size: cover; width: 20px; height: 20px; margin-left: 5px;"></button> 
                           </form>
                        

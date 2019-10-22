@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <% include plantillas/header-styles.ejs %>
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <% include plantillas/menu.ejs %>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Administrador </h1>
+                        <p class="lead"> <%= tipo %> CURSO.</p>
+                    </div>
+                </div>
+                <div class="container" style="margin-left: 20px;margin-right: 20px;">
+               <form method="POST" action="http://localhost:8888/admin/add_curso_post">
+                    <input type="hidden" name="id" value="<%= curso.id %>">
+                    <input type="hidden" id="cant" name="cant" value="1">
+                    <label>Nombre
+                      <input type="text" placeholder="Nombre" value="<%= curso.nombre %>" name="nombre" aria-describedby="exampleHelpText">
+                    </label>
+                    <label>
+                      Grado
+                      <input type="text" placeholder="Grado" value="<%= curso.grado %>" name="grado">
+                    </label> 
+
+                    <% if(tipo != "EDITAR") {%>
+                    <label>
+                      Rubrica 
+
+                       <table id ="myTable">
+                        <thead>
+                          <tr>
+                            <th width="100">Item</th>
+                            <th width="100">Sobresaliente</th>
+                            <th width="100">Logrado</th>
+                            <th width="100">En proceso</th>
+                            <th width="100">En inicio</th>
+                           
+                            <th width="100">Acciones</th>
+                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          <tr>
+                            <td><input type="text" name="i1"></td>
+                            <td><input type="text" name="rs1"></td>
+                            <td><input type="text" name="rl1"></td>
+                            <td><input type="text" name="rp1"></td>
+                            <td><input type="text" name="ri1"></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                      
+                    </label>
+                    <% }%>
+                    <div class="input-group">
+                      <% if(tipo != "EDITAR") {%>
+                      <button type="button" class="alert button" onclick="myFunction()" style="    margin-right: 5px;">+ </button>
+                      <% }%>
+                      <button type="button submit" class="success button">Save</button>
+                    </div>
+              </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+    <script>
+      var cont = 2;
+      function myFunction() {
+        var cant = document.getElementById("cant");
+        cant.value=cont;
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(cont);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var a = "<input type='text' name='";
+        
+        //a = a.concat(cont,"'>");
+        cell1.innerHTML = a.concat("i",cont,"'>");
+        cell2.innerHTML = a.concat("rs",cont,"'>");
+        cell3.innerHTML = a.concat("rl",cont,"'>");
+        cell4.innerHTML = a.concat("rp",cont,"'>");
+        cell5.innerHTML = a.concat("ri",cont,"'>");
+        cont = cont+1;
+      }
+    </script>
+</body>
+
+</html>
