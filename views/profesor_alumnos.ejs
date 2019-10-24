@@ -1,0 +1,203 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Welcome</title>
+    <link rel="stylesheet" href="../css/foundation.min.css">
+    <link rel="stylesheet" href="../css/foundation.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <style>
+      /* Popup container - can be anything you want */
+      .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* The actual popup */
+      .popup .popuptext {
+        visibility: hidden;
+        width: 100%;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0px 0;
+        position: unset;
+        z-index: 1;;
+        left: 0px;
+      }
+
+      /* Popup arrow */
+      .popup .popuptext::after {
+        content: "";
+        position: absolute;
+        top: 1%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+
+      /* Toggle this class - hide and show the popup */
+      .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+      }
+
+      /* Add animation (fade in the popup) */
+      @-webkit-keyframes fadeIn {
+        from {opacity: 0;} 
+        to {opacity: 1;}
+      }
+
+      @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity:1 ;}
+      }
+    </style>
+
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+                <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="test-eq">
+                  <div class="cell medium-12">
+                    <div class="callout" data-equalizer-watch>
+                      <img src= "../img/login.png">
+                    </div>
+                  </div>
+                 
+                </div>
+                <% include plantillas/header-profe.ejs %>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Administrador </h1>
+                        <p class="lead">Notas  <%= curso %>. </p>
+                        <div class="popup" onclick="myFunction()">VER RÚBRICA
+
+                          <span class="popuptext" id="myPopup">
+                            <table id ="myTable">
+                              <thead>
+                                <tr>
+                                  <th width="100">Item</th>
+                                  <th width="100">Sobresaliente</th>
+                                  <th width="100">Logrado</th>
+                                  <th width="100">En proceso</th>
+                                  <th width="100">En inicio</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                               
+                                <% examen.forEach(function(rub) { %>
+                                <tr>
+                                  
+                                  <td><input type="text" name="i" value="<%= rub.item %>"></td>
+                                  <td><input type="text" name="rs" value="<%= rub.sobresaliente %>"></td>
+                                  <td><input type="text" name="rl" value="<%= rub.logrado %>"></td>
+                                  <td><input type="text" name="rp" value="<%= rub.proceso %>"></td>
+                                  <td><input type="text" name="ri" value="<%= rub.inicio %>"></td>
+
+                                </tr>
+                                <% }); %>
+                                
+                              </tbody>
+                            </table>
+                          </span>
+                        </div>
+                    </div>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th width="100">Nombre</th>
+                      <th width="100">Apellido</th>
+                      <% examen.forEach(function(n) { %>
+                      <th width="1"><%= n.item %></th>
+                      <% }); %>
+                      <th width="10">Guardar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% alumno.forEach(function(alu) { %>
+                    <tr> 
+                      <form method="POST" action="http://localhost:8888/profesor/post_notas">
+                        <td><%= alu.nombre %></td>
+                        <td><%= alu.apellido %></td>
+                        <% 
+                        var cont = 0;
+                         var notasString ="";
+                         var bool = 0;
+                         console.log(notas);
+                          notas.forEach(function(nota) { 
+                              
+                              if(nota.id_alumno == alu.id ){
+                                 %>
+                                  <input type="hidden" name="id" value="<%= nota.id %>">
+                                 <%
+                                bool = 1;
+                                notasString = nota.nota;
+                              }
+                          });
+                          if(bool == 0){
+                            examen.forEach(function(not) { 
+                            //imprimir rubricas
+                            %>
+                             <td width="1"><input type="text" value="" name="n<%= cont++; %>"></td>
+                          <% }); 
+
+                          }else{
+
+                            var array = notasString.split(",");
+                            array.forEach(function(element) {
+                            %>
+                            <td width="1"><input type="text" value="<%= element %>" name="n<%= cont++; %>"></td>
+                          <% });
+                            } %>
+                          
+                        <td style="display: inline-flex;">
+
+                                <input type="hidden" name="cant" value="<%= cont %>">
+                                <input type="hidden" name="id_alumno" value="<%= alu.id %>">
+                                <input type="hidden" name="id_curso" value="<%= curso %>">
+                                <button class="alert button" type="submit" >Guardar </button> 
+                                
+                        </td>
+                      </form>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+                <hr>
+               
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+      <script>
+  // When the user clicks on div, open the popup
+  function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+  </script>
+</body>
+
+</html>

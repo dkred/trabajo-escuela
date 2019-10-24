@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <% include plantillas/header-styles.ejs %>
+    <style type="text/css">
+      .boton{
+
+      }
+    </style>
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+                <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="test-eq">
+                  <div class="cell medium-12">
+                    <div class="callout" data-equalizer-watch>
+                      <img src= "img/login.png">
+                    </div>
+                  </div>
+                 
+                </div>
+                <% include plantillas/header-estudent.ejs %>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Estudiante</h1>
+                        <p class="lead">Bienvenido <%= usuario %> <%= datos[0].apellido %>.</p>
+                        <p class="lead">GRADO: <%= datos[0].grado %>.</p>
+                        <p class="lead">SECCIÓN: <%= datos[0].seccion %>.</p>
+                        <p class="lead">TUTOR: <%= datos[0].tutor %>.</p>
+                        
+                    </div>
+                </div>
+                
+                <div class="top-bar" id="example-menu">
+                  <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                      <li class="menu-text">Notas</li>
+                      
+                    </ul>
+                  </div>
+                  
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th width="100">Cursos</th>
+                      
+                     <% 
+
+                        var array = notas[0].nota.split(",");
+                        var cont= 0;
+                        array.forEach(function(element) {
+                          cont++;
+                          %>
+                           <th width="100">Nota<%= cont%></th>
+                          <%
+                        });
+                      %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% notas.forEach(function(pro) { %>
+                    <tr>
+                      <td><%= pro.nombre %></td>
+                      <% 
+                        var array = pro.nota.split(",");
+                        var cont= 0;
+                        array.forEach(function(element) {
+                          
+                          %>
+                           <td width="100"><%= element%></td>
+                          <%
+                        });
+                      %>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+</html>

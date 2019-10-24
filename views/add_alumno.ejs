@@ -31,16 +31,21 @@
                       <input type="text" placeholder="Apellidos" value="<%= alumno.apellido %>" name="apellido">
                     </label>
                     <label>
-                      Grado
-                      <input type="text"  placeholder="Grado" name="grado" value="<%= alumno.grado %>">
+                      Grado 
+                      
+                      <input type="text"  placeholder="1ro,2do,3ro,4to,5to" name="grado" value="<%= alumno.grado %>">
                     </label>
                     <label>
                       Sección
-                      <input type="text"  placeholder="Sección" name="seccion" value="<%= alumno.seccion %>">
+                      <input type="text"  placeholder="A,B,C,D,E" name="seccion" value="<%= alumno.seccion %>">
                     </label>
                      <label>
                       Tutor
                       <input type="text"  placeholder="Tutor" name="tutor" value="<%= alumno.tutor %>">
+                    </label>
+                     <label>
+                      Password
+                      <input type="text" placeholder="Contraseña" value="<%= alumno.password %>" name="password">
                     </label>
                     <div class="input-group">
                       <button type="button submit" class="success button">Save</button>

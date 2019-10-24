@@ -31,7 +31,34 @@
                       Grado
                       <input type="text" placeholder="Grado" value="<%= curso.grado %>" name="grado">
                     </label> 
+                    <label>
+                      Profesor
+                       
+                        <select name="profesor" >
+                          <option value="0">Selecciona el profesor</option>
+                          <% profesor.forEach(function(profe) { 
+                            var selected = ( curso.profesor == profe.nombre ) ? "selected" : "";
+                            %><option value="<%= profe.nombre %>" <%= selected %> > <%= profe.nombre %></option>
+                              
+                          <% }); %>
 
+                        </select>
+                      
+                    </label> 
+                    <label>
+                      Secciones 
+                       <input type="text" id="secciones" name="secciones" value="<%= curso.secciones %>" readonly="readonly">
+                       <select id="producto" name="producto" onchange="ShowSelected();">
+                        <option value="0">Selecciona las secciones</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+
+                      </select>
+                      
+                    </label> 
                     <% if(tipo != "EDITAR") {%>
                     <label>
                       Rubrica 
@@ -101,6 +128,18 @@
         cell4.innerHTML = a.concat("rp",cont,"'>");
         cell5.innerHTML = a.concat("ri",cont,"'>");
         cont = cont+1;
+      }
+      var secciones ="";
+      function ShowSelected()
+      {
+      /* Para obtener el valor */
+      var cod = document.getElementById("producto").value;
+      secciones = secciones.concat(cod,',');
+      
+       
+      /* Para obtener el texto */
+      var combo = document.getElementById("secciones");
+      combo.value = secciones;
       }
     </script>
 </body>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Welcome</title>
+    <link rel="stylesheet" href="../css/foundation.min.css">
+    <link rel="stylesheet" href="../css/foundation.css">
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+                <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="test-eq">
+                  <div class="cell medium-12">
+                    <div class="callout" data-equalizer-watch>
+                      <img src= "../img/login.png">
+                    </div>
+                  </div>
+                 
+                </div>
+               <% include plantillas/header-estudent.ejs %>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                
+                <div class="callout primary">
+                    <div class="row column">
+                        <h1>Panel Alumno </h1>
+                        <p class="lead">Bienvenido <%= usuario %>.</p>
+                    </div>
+                </div>
+                <div class="container" style="margin-left: 20px; margin-right: 20px;">
+                    <table id ="myTable">
+                        <thead>
+                          <tr>
+                            <th width="100">Item</th>
+                            <th width="100">Sobresaliente</th>
+                            <th width="100">Logrado</th>
+                            <th width="100">En proceso</th>
+                            <th width="100">En inicio</th>
+                           
+                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                           <% rubrica.forEach(function(rub) { %>
+                            <tr>
+                             
+                              <td><%= rub.item %></td>
+                              <td><%= rub.sobresaliente %>"</td>
+                              <td><%= rub.logrado %>"</td>
+                              <td><%= rub.proceso %>"</td>
+                              <td><%= rub.inicio %>"</td>
+                              
+                              
+                            </form>
+                            </tr>
+                            <% }); %>
+                         
+                        </tbody>
+                      </table>
+                </div>
+                <hr>
+               
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+</html>

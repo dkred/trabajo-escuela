@@ -46,7 +46,9 @@
                       <th width="100">Id</th>
                       <th width="100">Nombre</th>
                       <th width="100">Grado</th>
-                      <th width="100">Rubrica</th>
+                      <th width="100">Sección</th>
+                      <th width="100">Profesor</th>
+                      <th width="50">Rubrica</th>
                       <th width="100">Acciones</th>
                     </tr>
                   </thead>
@@ -56,6 +58,8 @@
                       <td><%= cur.id %></td>
                       <td><%= cur.nombre %></td>
                       <td><%= cur.grado %></td>
+                      <td><%= cur.secciones %></td>
+                      <td><%= cur.profesor %></td>
                       <td>
                            <form method="POST" action="http://localhost:8888/admin/ver_rubrica_post">
                               <input type="hidden" name="id" value="<%= cur.id %>">
