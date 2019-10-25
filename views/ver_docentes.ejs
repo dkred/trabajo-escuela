@@ -33,11 +33,14 @@
                       
                     </ul>
                   </div>
-                  <div class="top-bar-right">
+                  <div class="top-bar-right"> 
+                    <form  method="POST" action="http://localhost:8888/admin/buscar_docente_post">
                     <ul class="menu">
-                      <li><input type="search" placeholder="Search"></li>
-                      <li><button type="button" class="button">Search</button></li>
+                     
+                        <li><input type="search" name="buscar" placeholder="Search"></li>
+                        <li><button type="button submit" class="button">Search</button></li>
                     </ul>
+                    </form>
                   </div>
                 </div>
                 <table>
@@ -45,9 +48,7 @@
                     <tr>
                       <th width="100">Nombre</th>
                       <th width="100">Apellido</th>
-                      <th width="100">Curso</th>
-                      <th width="100">Grado</th>
-                      <th width="100">Sección</th>
+                      
                       <th width="100">Acciones</th>
                     </tr>
                   </thead>
@@ -56,9 +57,7 @@
                     <tr>
                       <td><%= profe.nombre %></td>
                       <td><%= profe.apellido %></td>
-                      <td><%= profe.curso %></td>
-                      <td><%= profe.grado %></td>
-                      <td><%= profe.seccion %></td>
+                     
                       <td style="display: inline-flex;">
                         
                           <form method="POST" action="http://localhost:8888/admin/edit_docente_post">

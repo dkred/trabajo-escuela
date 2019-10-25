@@ -54,11 +54,30 @@ app.get("/admin", (req,res) => {
 });
 
 //panel Admin Docente BEGIN////////////////////////////////////////////////////////////////////////
+app.post("/admin/buscar_docente_post", (req,res) => {
+    req.session.buscar_profesor = req.body.buscar;
+    res.redirect("/admin/docente");
+});
+app.post("/admin/buscar_curso_post", (req,res) => {
+    req.session.buscar_curso = req.body.buscar;
+    res.redirect("/admin/curso");
+});
+app.post("/admin/buscar_alumno_post", (req,res) => {
+    req.session.buscar_alumno = req.body.buscar;
+    res.redirect("/admin/alumno");
+});
+
 app.get("/admin/docente", (req,res) => {
     
     var connection = conectar();
     connection.connect();
-    var query = "SELECT * FROM profesores ";
+    var query;
+    if(req.session.buscar_profesor){
+        query = "SELECT * FROM profesores WHERE nombre LIKE '%"+req.session.buscar_profesor+"%' ";
+    }
+    else{
+        query = "SELECT * FROM profesores ";
+    }
     
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
@@ -164,8 +183,13 @@ app.get("/admin/alumno", (req,res) => {
     
     var connection = conectar();
     connection.connect();
-    var query = "SELECT * FROM alumnos ";
-    
+    var query ;
+    if(req.session.buscar_alumno){
+        query = "SELECT * FROM alumnos WHERE nombre LIKE '%"+req.session.buscar_alumno+"%' ";
+    }
+    else{
+        query = "SELECT * FROM alumnos ";
+    }
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
 
@@ -375,12 +399,18 @@ app.post("/admin/delete_usuario_post",(req,res) => {
 //Admin Usuario END////////////////////////////////////////////////////////////////////////
 
 //Admin CRUSOS BEGIN/////////////////////////////////////////////////////////////////////
+
 app.get("/admin/curso", (req,res) => {
     
     var connection = conectar();
     connection.connect();
-    var query = "SELECT * FROM cursos ";  
-    
+    var query; 
+    if(req.session.buscar_curso){
+        query = "SELECT * FROM cursos WHERE nombre LIKE '%"+req.session.buscar_curso+"%' "; 
+    }
+    else{
+        query = "SELECT * FROM cursos "; 
+    }
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
 
