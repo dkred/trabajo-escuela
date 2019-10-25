@@ -65,22 +65,33 @@
                           <%
                         });
                       %>
+                      <th width="10">Promedio</th>
                     </tr>
+
                   </thead>
                   <tbody>
-                    <% notas.forEach(function(pro) { %>
+
+                    <% var cont= 0;
+                      var promedio = 0;
+                     notas.forEach(function(pro) { %>
                     <tr>
                       <td><%= pro.nombre %></td>
                       <% 
                         var array = pro.nota.split(",");
-                        var cont= 0;
+                      
                         array.forEach(function(element) {
-                          
+                          cont++;
                           %>
                            <td width="100"><%= element%></td>
                           <%
+                          promedio += parseInt(element);
+                          
                         });
                       %>
+                      <td width="10"><%=promedio/cont%></td>
+                    </tr>
+                    <tr>
+                      
                     </tr>
                     <% }); %>
                   </tbody>

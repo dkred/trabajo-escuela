@@ -129,6 +129,7 @@
                       <th width="1"><%= n.item %></th>
                       <% }); %>
                       <th width="10">Guardar</th>
+                      <th width="10">Promedio</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -139,9 +140,9 @@
                         <td><%= alu.apellido %></td>
                         <% 
                         var cont = 0;
+                        var promedio = 0;
                          var notasString ="";
                          var bool = 0;
-                         console.log(notas);
                           notas.forEach(function(nota) { 
                               
                               if(nota.id_alumno == alu.id ){
@@ -163,6 +164,7 @@
 
                             var array = notasString.split(",");
                             array.forEach(function(element) {
+                            promedio += parseInt(element);
                             %>
                             <td width="1"><input type="text" value="<%= element %>" name="n<%= cont++; %>"></td>
                           <% });
@@ -175,6 +177,9 @@
                                 <input type="hidden" name="id_curso" value="<%= curso %>">
                                 <button class="alert button" type="submit" >Guardar </button> 
                                 
+                        </td>
+                        <td>
+                            <%= promedio/cont%>
                         </td>
                       </form>
                     </tr>

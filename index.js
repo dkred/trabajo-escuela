@@ -464,20 +464,19 @@ app.post("/admin/add_curso_post",(req,res) => {
    
     var connection = conectar();
     connection.connect();
-
     var connection2 = conectar();
     connection2.connect();
     var connection3 = conectar();
     connection3.connect();
     var query ="";
     if(req.body.id == 0){
-        query = "INSERT INTO cursos (nombre,grado,secciones) VALUES('";
+        query = "INSERT INTO cursos (nombre,grado,secciones,profesor) VALUES('";
         query = query.concat(req.body.nombre,"','",req.body.grado,"','",req.body.secciones,"','",req.body.profesor,"')");
         
-        var query_max ="SELECT Max(id) as 'max' FROM cursos";
+        var query_max ="SELECT Max(id) as max FROM cursos";
         var query2;
+
         connection2.query(query_max, function (error, results, fields) {
-            
             if(req.body.cant > 0)
             {
                 query2 = "INSERT INTO rubricas (id_curso,item,sobresaliente,logrado,proceso,inicio) VALUES('";
@@ -545,6 +544,7 @@ app.post("/admin/add_curso_post",(req,res) => {
         query = query.concat(req.body.nombre,"', grado ='",req.body.grado,"', secciones ='",req.body.secciones,"', profesor ='",req.body.profesor,"'");
         query = query.concat(" WHERE id = '",req.body.id,"'");
     }
+
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
             res.redirect("/admin/curso");
