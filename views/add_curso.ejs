@@ -37,8 +37,8 @@
                         <select name="profesor" >
                           <option value="0">Selecciona el profesor</option>
                           <% profesor.forEach(function(profe) { 
-                            var selected = ( curso.profesor == profe.nombre ) ? "selected" : "";
-                            %><option value="<%= profe.nombre %>" <%= selected %> > <%= profe.nombre %></option>
+                            var selected = ( curso.id_profesor == profe.id ) ? "selected" : "";
+                            %><option value="<%= profe.id %>" <%= selected %> > <%= profe.nombre %></option>
                               
                           <% }); %>
 

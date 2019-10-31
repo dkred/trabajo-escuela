@@ -66,7 +66,10 @@ app.post("/admin/buscar_alumno_post", (req,res) => {
     req.session.buscar_alumno = req.body.buscar;
     res.redirect("/admin/alumno");
 });
-
+app.post("/profesor/buscar_curso_post", (req,res) => {
+    req.session.buscar_curso = req.body.buscar;
+    res.redirect("/profesor");
+});
 app.get("/admin/docente", (req,res) => {
     
     var connection = conectar();
@@ -406,10 +409,10 @@ app.get("/admin/curso", (req,res) => {
     connection.connect();
     var query; 
     if(req.session.buscar_curso){
-        query = "SELECT * FROM cursos WHERE nombre LIKE '%"+req.session.buscar_curso+"%' "; 
+        query = "SELECT cursos.id, cursos.nombre,cursos.grado, cursos.secciones,cursos.id_profesor, profesores.nombre as profesor FROM cursos LEFT join profesores on cursos.id_profesor = profesores.id WHERE nombre LIKE '%"+req.session.buscar_curso+"%' "; 
     }
     else{
-        query = "SELECT * FROM cursos "; 
+        query = "SELECT cursos.id, cursos.nombre,cursos.grado, cursos.secciones,cursos.id_profesor, profesores.nombre as profesor FROM cursos LEFT join profesores on cursos.id_profesor = profesores.id "; 
     }
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
@@ -500,7 +503,7 @@ app.post("/admin/add_curso_post",(req,res) => {
     connection3.connect();
     var query ="";
     if(req.body.id == 0){
-        query = "INSERT INTO cursos (nombre,grado,secciones,profesor) VALUES('";
+        query = "INSERT INTO cursos (nombre,grado,secciones,id_profesor) VALUES('";
         query = query.concat(req.body.nombre,"','",req.body.grado,"','",req.body.secciones,"','",req.body.profesor,"')");
         
         var query_max ="SELECT Max(id) as max FROM cursos";
@@ -571,7 +574,7 @@ app.post("/admin/add_curso_post",(req,res) => {
     }
     else{
         query = "UPDATE cursos SET nombre ='";
-        query = query.concat(req.body.nombre,"', grado ='",req.body.grado,"', secciones ='",req.body.secciones,"', profesor ='",req.body.profesor,"'");
+        query = query.concat(req.body.nombre,"', grado ='",req.body.grado,"', secciones ='",req.body.secciones,"', id_profesor ='",req.body.profesor,"'");
         query = query.concat(" WHERE id = '",req.body.id,"'");
     }
 
@@ -645,12 +648,23 @@ app.post("/admin/ver_rubrica_post", (req,res) => {
 //Admin Rubrica END////////////////////////////////////////////////////////////////////////
 
 
+
 app.get("/profesor", (req,res) => {
 
     var connection = conectar();
     connection.connect();
-     var query = "SELECT * FROM cursos WHERE profesor='";
-    query = query.concat(req.session.usuario,"'");
+    var query ;
+    if(req.session.buscar_curso){
+         query = "SELECT * FROM cursos WHERE id_profesor='";
+         query = query.concat(req.session.usuario_id,"' and ","nombre LIKE '%",req.session.buscar_curso,"%' ");
+      
+    }
+    else{
+        query = "SELECT * FROM cursos WHERE id_profesor='";
+        query = query.concat(req.session.usuario_id,"'");
+    }
+
+   
     
     connection.query(query, function (error, results, fields) {
         if(req.session.auth){
@@ -669,8 +683,8 @@ app.get("/profesor/cursos", (req,res) => {
 
     var connection = conectar();
     connection.connect();
-     var query = "SELECT * FROM cursos WHERE profesor='";
-    query = query.concat(req.session.usuario,"'");
+     var query = "SELECT * FROM cursos WHERE id_profesor='";
+    query = query.concat(req.session.usuario_id,"'");
     
     connection.query(query, function (error, results, fields) {
         if(req.session.auth){
@@ -974,6 +988,7 @@ app.post("/login",(req,res) => {
                     req.session.tipo = "profesor";
                     req.session.auth = 1;
                     req.session.usuario = results[0].nombre;
+                    req.session.usuario_id = results[0].id;
                     res.send({
                         status : 1,
                         nombre : results[0].user
